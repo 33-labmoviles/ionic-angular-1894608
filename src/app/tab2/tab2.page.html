@@ -1,17 +1,20 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-title>Información de los alumnos</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">Información de los alumnos</ion-title>
+		</ion-toolbar>
+	</ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+	<ion-list>
+		<ion-item *ngFor="let alumno of alumnos" [routerLink]="['/alumno-detalle', alumno.matricula]">
+			<ion-img class="icono-lista" src="assets/logo-fcfm.jpg"></ion-img>
+			<ion-label>{{alumno.nombre}}</ion-label>
+		</ion-item>
+	</ion-list>
 </ion-content>
