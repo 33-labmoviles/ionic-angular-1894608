@@ -1,17 +1,35 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-title>Registro</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">Registro</ion-title>
+		</ion-toolbar>
+	</ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+	<form #nuevoAlumno="ngForm" (ngSubmit)="onSubmit(nuevoAlumno)">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="2">Nombre:</ion-col>
+				<ion-col size="10">
+					<ion-input class="campo-texto" placeholder="Jose" [(ngModel)]="modelo.nombre"  name="nombre"></ion-input>
+				</ion-col>
+				<ion-col size="2">Apellido:</ion-col>
+				<ion-col size="10">
+					<ion-input class="campo-texto" placeholder="Vazquez" [(ngModel)]="modelo.apellido"  name="apellido"></ion-input>
+				</ion-col>
+				<ion-col size="2">Matricula:</ion-col>
+				<ion-col size="10">
+					<ion-input class="campo-texto" placeholder="1894608" [(ngModel)]="modelo.matricula" name="matricula"></ion-input>
+				</ion-col>
+				<ion-col size="12">
+					<ion-button type="submit">Agregar alumno</ion-button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
 </ion-content>
