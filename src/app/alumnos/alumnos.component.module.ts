@@ -6,9 +6,12 @@ import { IonicModule } from '@ionic/angular';
 
 import { AlumnosComponent } from './alumnos.component';
 
+import { RouterModule } from '@angular/router';
+
 @NgModule({
-  imports: [ CommonModule, FormsModule, IonicModule],
-  declarations: [AlumnosComponent],
-  exports: [AlumnosComponent]
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule],
+	declarations: [AlumnosComponent],
+	exports: [AlumnosComponent]
 })
+
 export class AlumnosComponentModule {}

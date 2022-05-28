@@ -7,10 +7,6 @@ const routes: Routes = [
 	{
 		path: '',
 		component: Tab2Page,
-	},
-	{
-		path: 'alumno-detalle',
-		component: AlumnoDetalleComponent
 	}
 ];
 

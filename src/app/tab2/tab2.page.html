@@ -3,7 +3,7 @@
 		<ion-title>Información de los alumnos</ion-title>
 	</ion-toolbar>
 </ion-header>
-
+<ion-router-outlet></ion-router-outlet>
 <ion-content [fullscreen]="true">
 	<ion-header collapse="condense">
 		<ion-toolbar>
@@ -11,10 +11,5 @@
 		</ion-toolbar>
 	</ion-header>
 
-	<ion-list>
-		<ion-item *ngFor="let alumno of alumnos" [routerLink]="['/alumno-detalle', alumno.matricula]">
-			<ion-img class="icono-lista" src="assets/logo-fcfm.jpg"></ion-img>
-			<ion-label>{{alumno.nombre}}</ion-label>
-		</ion-item>
-	</ion-list>
+	<app-alumnos></app-alumnos>
 </ion-content>
