@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
-import { HttpClient } from '@angular/common/http';
+import { FirebaseDatabaseService } from '../firebase-database.service';
 
 import { Alumno } from '../alumno';
 
@@ -12,12 +12,24 @@ import { Alumno } from '../alumno';
 })
 
 export class Tab3Page {
-	constructor(private http: HttpClient) {}
-	
-	modelo: Alumno;
-	
+	constructor(private db: FirebaseDatabaseService) {}
+
+	nuevoAlumno: any;
+
+	@Input() nombre: string = "";
+	@Input() apellido: string = "";
+	@Input() matricula: string = "";
+
 	onSubmit(agregarAlumno: NgForm) {
-		console.log('submit');
-		// request
+		this.nuevoAlumno = {
+			nombre: this.nombre,
+			apellido: this.apellido,
+			matricula: this.matricula,
+			imagen: 'assets/logo-fcfm.jpg'
+		};
+
+		this.db.agregarAlumno(this.nuevoAlumno).subscribe(res => {
+			console.log('Se agrego correctamente');
+		});
 	}
 }

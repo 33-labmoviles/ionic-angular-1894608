@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient } from '@angular/common/http';
 
 import { Alumno } from './alumno';
 import { Observable } from 'rxjs';
-
-//import { map, tap, catchError } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,10 +11,6 @@ import { Observable } from 'rxjs';
 export class FirebaseDatabaseService {
 
 	constructor(private http: HttpClient) {}
-
-	httpOptions = {
-		headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-	};
 
 	// GET
 	getAlumnos(): Observable<Alumno> {
@@ -28,22 +21,13 @@ export class FirebaseDatabaseService {
 		);
 	}
 
-	getAlumnoDetalle(id: number){
-		return this.http.get('https://alumnos-4e1ea-default-rtdb.firebaseio.com/alumnos/'+ id + '.json');
+	// GET
+	obtenerDetallesDeAlumno(id: string) {
+		return this.http.get('https://alumnos-4e1ea-default-rtdb.firebaseio.com/alumnos/' + id + '.json');
 	}
 
 	// POST
-	postAlumno(nuevoAlumno: any){
+	agregarAlumno(nuevoAlumno: any) {
 		return this.http.post('https://alumnos-4e1ea-default-rtdb.firebaseio.com/alumnos.json', nuevoAlumno);
-	}
-
-	// DELETE
-	deleteAlumno(alumno: string) {
-		return this.http.delete('https://alumnos-4e1ea-default-rtdb.firebaseio.com/alumnos/' + alumno+'.json');
-	}
-
-	// PUT
-	actualizarAlumno(id: number , nuevosDatos: string) {
-		return this.http.put('https://alumnos-4e1ea-default-rtdb.firebaseio.com/' + id + '.json', nuevosDatos);
 	}
 }

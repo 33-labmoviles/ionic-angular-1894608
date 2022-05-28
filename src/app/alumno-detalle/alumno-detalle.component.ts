@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ActionSheetController } from '@ionic/angular';
 
+import { FirebaseDatabaseService } from '../firebase-database.service';
+
 @Component({
 	selector: 'app-alumno-detalle',
 	templateUrl: './alumno-detalle.component.html',
@@ -11,54 +13,22 @@ import { ActionSheetController } from '@ionic/angular';
 
 export class AlumnoDetalleComponent implements OnInit {
 
-	constructor(private ruta: ActivatedRoute, public actionSheetC: ActionSheetController) { }
+	constructor(private ruta: ActivatedRoute,
+		private db: FirebaseDatabaseService,
+		public actionSheetC: ActionSheetController) { }
 
 	ngOnInit() {
-		this.obtenerDetalleAlumno(this.matricula);
+		this.rellenarDetallesDeAlumno(this.id);
 	}
-
-	alumnos = [
-		{
-			nombre: 'Christian',
-			apellido: 'Ramirez',
-			matricula: '0000001',
-			imagen: 'assets/logo-fcfm.jpg'
-		},
-		{
-			nombre: 'Aaylin',
-			apellido: 'Demetci',
-			matricula: '0000002',
-			imagen: 'assets/logo-fcfm.jpg'
-		},
-		{
-			nombre: 'Brian',
-			apellido: 'Esquivel',
-			matricula: '0000003',
-			imagen: 'assets/logo-fcfm.jpg'
-		},
-		{
-			nombre: 'Diego',
-			apellido: 'Jasso',
-			matricula: '0000004',
-			imagen: 'assets/logo-fcfm.jpg'
-		},
-		{
-			nombre: 'Jose',
-			apellido: 'Vazquez',
-			matricula: '1894608',
-			imagen: 'assets/logo-fcfm.jpg'
-		}
-	];
 
 	alumnoDetalle: any = {};
 
-	matricula: string = this.ruta.snapshot.params.id;
+	id: string = this.ruta.snapshot.params.id;
 
-	obtenerDetalleAlumno(matricula: string): any {
-		for (let i = 0; i < this.alumnos.length; i++)
-			if (this.alumnos[i].matricula == matricula)
-				this.alumnoDetalle = this.alumnos[i];
-		return this.alumnoDetalle;
+	rellenarDetallesDeAlumno(id: string) {
+		this.db.obtenerDetallesDeAlumno(id).subscribe(data => {
+			this.alumnoDetalle = data;
+		});
 	}
 
 	async mostrarActionSheet() {

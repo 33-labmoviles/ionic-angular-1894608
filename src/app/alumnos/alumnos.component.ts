@@ -12,14 +12,17 @@ export class AlumnosComponent implements OnInit {
 	constructor(private db: FirebaseDatabaseService) { }
 
 	ngOnInit() {
-		this.cargarAlumnos();
+		this.getAlumnos();
 	}
 
 	alumnos: any = [];
 
-	cargarAlumnos() {
-		this.db.getAlumnos().subscribe(res => {
-			this.alumnos = res;
+	getAlumnos() {
+		this.db.getAlumnos().subscribe(respuesta => {
+			const alumnosRes: any = respuesta;
+			const alumnosArray = Object.keys(respuesta).forEach((key: any) => {
+				(this.alumnos).push(alumnosRes[key]);
+			});
 		});
 	}
 }
